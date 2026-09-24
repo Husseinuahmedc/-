@@ -1,0 +1,6 @@
+{
+  "name": "رشفة - متتبع القهوة اليومي",
+  "description": "تطبيق رشفة لتتبع كمية القهوة والكافيين اليومية بواجهة عربية أنيقة ومطابقة للتصميم",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

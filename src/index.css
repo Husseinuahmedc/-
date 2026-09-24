@@ -1,0 +1,304 @@
+@import "tailwindcss";
+
+:root {
+  /* تدرجات الخلفية الرئيسية */
+  --bg-gradient-top: #231b15;
+  --bg-gradient-bottom: #6f503a;
+  
+  /* ألوان الحاويات والبطاقات */
+  --card-bg-dark: #241c17;
+  --card-bg-gradient-start: #3c2c22;
+  --card-bg-gradient-end: #1e1612;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --card-border-focus: rgba(255, 255, 255, 0.16);
+  
+  /* ألوان التمييز (اللون الآجري / تيراكوتا) */
+  --color-accent-terracotta: #8a4836;
+  --color-accent-terracotta-light: #9c5542;
+  --color-accent-terracotta-glow: rgba(138, 72, 54, 0.35);
+  
+  /* ألوان النصوص */
+  --text-white: #ffffff;
+  --text-primary: #f5ede6;
+  --text-secondary: #c5b0a3;
+  --text-muted: #968173;
+  --text-dim: #736257;
+
+  /* ألوان الأزرار والتفاعل */
+  --btn-dark-bg: #221813;
+  --btn-dark-gradient: linear-gradient(135deg, #3d2b20 0%, #1e1510 100%);
+  --btn-modal-action: #382920;
+  --tab-active-bg: #433125;
+  --tab-inactive-text: #9f8a7d;
+  
+  /* أعمدة الرسم البياني */
+  --chart-bar-inactive: #433328;
+  --chart-bar-active: #8a4836;
+  
+  /* أيقونات الأكواب والمربعات */
+  --cup-box-filled-bg: #3f2d22;
+  --cup-box-filled-border: rgba(255, 255, 255, 0.22);
+  --cup-box-empty-bg: rgba(255, 255, 255, 0.04);
+  --cup-box-empty-border: rgba(255, 255, 255, 0.08);
+  
+  /* التنبيهات */
+  --tip-bg: rgba(72, 52, 38, 0.55);
+  --tip-border: rgba(255, 255, 255, 0.07);
+}
+
+/* إعدادات الخط والصفحة بالكامل */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #15100c;
+  color: var(--text-primary);
+  font-family: 'Readex Pro', 'Tajawal', system-ui, -apple-system, sans-serif;
+  direction: rtl;
+  text-align: right;
+  overflow-x: hidden;
+}
+
+/* محاكي شاشة الهاتف للمقاس المطلوب (375px - 430px) */
+.mobile-app-wrapper {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #140e0b;
+}
+
+.mobile-phone-frame {
+  width: 100%;
+  max-width: 430px;
+  min-width: 375px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: linear-gradient(180deg, var(--bg-gradient-top) 0%, var(--bg-gradient-bottom) 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.85);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* شريط التمرير مخصص وأنيق */
+.mobile-phone-frame::-webkit-scrollbar {
+  width: 4px;
+}
+.mobile-phone-frame::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+/* تأثير التعتيم للنافذة المنبثقة */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.68);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-content-card {
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* دائرة العداد الرئيسية */
+.counter-circle {
+  width: 236px;
+  height: 236px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 25%, #3d2b20 0%, #1c1511 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.counter-circle:active {
+  transform: scale(0.98);
+}
+
+/* بطاقات الإحصائيات */
+.stat-card {
+  background: linear-gradient(180deg, var(--card-bg-gradient-start) 0%, var(--card-bg-gradient-end) 100%);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 16px 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* بطاقة الفوائد وزين انت تدري */
+.benefits-highlight-card {
+  background: linear-gradient(180deg, #443226 0%, #1e1611 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 24px;
+  padding: 22px 20px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* بطاقة الفائدة المفردة */
+.benefit-row-card {
+  background: #251c17;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* بطاقة عنصر السجل */
+.history-item-card {
+  background: #261d17;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 15px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.15s ease;
+}
+
+.history-item-card:active {
+  background: #2f231c;
+}
+
+/* زر العودة وزر الإعدادات الدائري */
+.round-icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.round-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.round-icon-btn:active {
+  transform: scale(0.92);
+}
+
+/* زر الإضافة الرئيسي */
+.btn-primary-add {
+  background: var(--btn-dark-gradient);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  height: 54px;
+  width: 100%;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.15s ease;
+}
+
+.btn-primary-add:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* زر البدء في الأونبوردنج */
+.btn-onboarding-start {
+  background: #1c1511;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  height: 56px;
+  width: 100%;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  transition: all 0.15s ease;
+}
+
+.btn-onboarding-start:active {
+  transform: scale(0.97);
+}
+
+/* بانر الفوائد في الأسفل */
+.bottom-banner-card {
+  background: linear-gradient(180deg, #3d2c21 0%, #201712 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: 18px 20px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.bottom-banner-card:active {
+  transform: scale(0.98);
+  background: linear-gradient(180deg, #463326 0%, #251b15 100%);
+}
+
+/* بطاقة التنبيه بالأسفل */
+.alert-tip-card {
+  background: var(--tip-bg);
+  border: 1px solid var(--tip-border);
+  border-radius: 16px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f1dfd4;
+  font-size: 12px;
+  line-height: 1.6;
+}
